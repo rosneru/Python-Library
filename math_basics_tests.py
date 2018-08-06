@@ -3,11 +3,11 @@ import math_basics
 
 class TestMathBasics(unittest.TestCase):
 
-    def test_add(self):
-        self.assertEqual(math_basics.add(1, 1), 2)
-        self.assertEqual(math_basics.add(2, 1), 3)
-        self.assertEqual(math_basics.add(1, 2), 3)
-        self.assertEqual(math_basics.add(12, 99), 111)
+    def test_ggT(self):
+        self.assertEqual(math_basics.ggT(360, 945), 45)
+        self.assertEqual(math_basics.ggT(945, 360), 45)
+        self.assertEqual(math_basics.ggT(81, 98), 1)
+        self.assertEqual(math_basics.ggT(98, 81), 1)
 
 if __name__ == '__main__':
     unittest.main()
