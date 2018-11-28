@@ -10,4 +10,4 @@ class TestMathBasics(unittest.TestCase):
         self.assertEqual(math_basics.ggT(98, 81), 1)
 
 if __name__ == '__main__':
-    unittest.main(exit=False)
+    unittest.main()
