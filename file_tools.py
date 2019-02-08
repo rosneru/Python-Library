@@ -1,7 +1,7 @@
 """ Collection of file tools to quickly create test files etc """
 
 from glob import glob
-from os.path import exists, join
+import os
 
 def write_many_lines_to_file(file_name, number_of_lines):
   """ This function generates a file with name ``file_name`` and fills 
@@ -64,16 +64,41 @@ def multi_insert_src_class_object(dir_path, file_extension,
 #    print("Cancel.")
 #    return
 
+  #
+  # Creating a list of all files by extension in dir_path
+  #
+
   all_files = []
-
   if isinstance(file_extension, (list, tuple)):
+    # More then one extension given
     for extension in file_extension:
-      all_files.extend(glob(join(dir_path, extension)))
+      all_files.extend(glob(os.path.join(dir_path, extension)))
   else:
-    all_files = glob(join(dir_path, file_extension))
+    # Only one extension given
+    all_files = glob(os.path.join(dir_path, file_extension))
 
-  print("Listing all files:\n", all_files)
+  #
+  # Traversing each file in list and decide how to rename it
+  #
+  for file_name_full_path in all_files:
+    # Get file name without path
+    file_name_full = os.path.basename(file_name_full_path)
+
+    # Then also remove the extension
+    # (This will give the plain file name which is also the objet name
+    # which will be renamed inside the file)
+    plain_file_name = os.path.splitext(file_name_full)[0]
+#    removed_extension = os.path.splitext(file_name_full)[1]
+#    new_plain_name = new_name_insert(plain_file_name, insert_text, insert_index)
+#
+#def new_name_insert(old_name: str, insert_text: str, insert_index: int) -> str:
+#  if len(old_name) < insert_index:
+#    return old_name + insert_text
+#  
+#  char_after_insert = old_name[insert_index]
+#  print(char_after_insert)
+
 
 if __name__ == "__main__":
   # multi_insert_src_class_object("d:\DEV\Kruess\kr_tools_KruessBench\KruessBench\Views-KR-RICO", ".cs",  "rico", 0)
-  multi_insert_src_class_object('e:\\Temp\\Testfiles', '*.cs',  'kric', 0)
+  multi_insert_src_class_object('e:\\Temp\\Testfiles', ('*.cs', '*.resx'),  'kric', 0)
