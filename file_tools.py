@@ -56,15 +56,15 @@ def multi_insert_src_class_object(dir_path, file_extension,
     NOTE ``file_extension`` can be a tuple or list cover multiple 
     extensions.
     """
-    print("\nYou requested all '", file_extension,
-        "' files found in directory\n ", dir_path, 
-        "\nto get the text '", insert_text,"' inserted at position " , 
-        insert_index,"..\n\n", sep="")
+    # print("\nYou requested all '", file_extension,
+    #     "' files found in directory\n ", dir_path, 
+    #     "\nto get the text '", insert_text,"' inserted at position " , 
+    #     insert_index,"..\n\n", sep="")
         
-#    typed = input("Continue (y/n) ? ")
-#    if typed != "y":
-#        print("Cancel.")
-#        return
+    # answer = input("Continue (y/n) ? ")
+    # if answer != "y":
+    #     print("Cancel.")
+    #     return
 
     #
     # Creating a list of all files by extension in dir_path
@@ -96,7 +96,20 @@ def multi_insert_src_class_object(dir_path, file_extension,
         new_file_name_full_path = os.path.join(dir_path, new_plain_name)
         new_file_name_full_path += extension
 
-        print(old_file_name_full_path, "==>", new_file_name_full_path)
+        # Rename the file
+        os.rename(old_file_name_full_path, new_file_name_full_path)
+
+        # Read the renamed file
+        with open(new_file_name_full_path, 'r') as file:
+            file_content = file.read()
+
+        # Replace object name in file
+        file_content = file_content.replace(plain_file_name, new_plain_name)
+
+
+        # Write the replaced file content into the file
+        with open(new_file_name_full_path, 'w') as file:
+            file.write(file_content)
 
 
 def create_name_for_insert(old_name: str, insert_text: str, insert_index: int) -> str:
