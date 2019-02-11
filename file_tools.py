@@ -82,17 +82,21 @@ def multi_insert_src_class_object(dir_path, file_extension,
     #
     # Traversing each file in list and decide how to rename it
     #
-    for file_name_full_path in all_files:
+    for old_file_name_full_path in all_files:
         # Get file name without path
-        file_name_full = os.path.basename(file_name_full_path)
+        file_name_full = os.path.basename(old_file_name_full_path)
 
-        # Then also remove the extension
+        # Then also remove the extension and remember it for later
         # (This will give the plain file name which is also the objet name
         # which will be renamed inside the file)
         plain_file_name = os.path.splitext(file_name_full)[0]
-        removed_extension = os.path.splitext(file_name_full)[1]
+        extension = os.path.splitext(file_name_full)[1]
         new_plain_name = create_name_for_insert(plain_file_name, insert_text, insert_index)
-        print(plain_file_name)
+        
+        new_file_name_full_path = os.path.join(dir_path, new_plain_name)
+        new_file_name_full_path += extension
+
+        print(old_file_name_full_path, "==>", new_file_name_full_path)
 
 
 def create_name_for_insert(old_name: str, insert_text: str, insert_index: int) -> str:
