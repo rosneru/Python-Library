@@ -55,9 +55,12 @@ class Myers:
 
         # Creating a list of 0's with a distinct size
         v = [0] * (2 * maximum + 1)
+        trace = list()
 
         # Now iterate d from 0 to maximum in the outer loop.. 
         for d in range(0, maximum):
+            trace.append(v.copy())
+
             # ..and k from -d to d in steps of 2 in the inner loop
             for k in range(-d, d, 2):
                 if k == -d or (k != d and v[k - 1] < v[k +1]):
@@ -73,7 +76,12 @@ class Myers:
                 v[k] = x
 
                 if x >= n and y >= m:
-                    return d
+                    return trace
+    
+
+    def backtrack(self):
+        x, y = len(self._a), len(self._b)
+        
 
 
     def diff(self):
