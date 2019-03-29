@@ -27,9 +27,15 @@ class Document:
     def lines(self):
         try:
             with open(self.file_name, 'r') as file:
-                lines = [line.rstrip('\n') for line in file]
-                lines = enumerate(lines)
-                return list(lines)
+                numerated_lines = [line.rstrip('\n') for line in file]
+                numerated_lines = list(enumerate(numerated_lines))
+
+                lines = list()
+
+                for nl in numerated_lines:
+                    lines.append(Line(nl[0], nl[1]))
+
+                return lines
         except:
             return list()
         
@@ -39,9 +45,36 @@ class Document:
 # from here: https://blog.jcoglan.com/2017/02/15/the-myers-diff-algorithm-part-2/
 
 class Myers:
-    def __init__(self, a: list, b: list):
+    def __init__(self, a, b):
         self._a = a
         self._b = b
+
+    def shortest_edit(self):
+        n, m = len(self._a), len(self._b)
+        maximum = n + m
+
+        # Creating a list of 0's with a distinct size
+        v = [0] * (2 * maximum + 1)
+
+        # Now iterate d from 0 to maximum in the outer loop.. 
+        for d in range(0, maximum):
+            # ..and k from -d to d in steps of 2 in the inner loop
+            for k in range(-d, d, 2):
+                if k == -d or (k != d and v[k - 1] < v[k +1]):
+                    x = v[k + 1]
+                else:
+                    x = v[k - 1] + 1
+                
+                y = x - k
+
+                while x < n and y < m and self._a[x].text == self._b[y].text:
+                    x, y = x + 1, y + 1
+                
+                v[k] = x
+
+                if x >= n and y >= m:
+                    return d
+
 
     def diff(self):
         if len(self._a) == 0:
@@ -50,6 +83,8 @@ class Myers:
         if len(self._b) == 0:
             return
 
+        print(self.shortest_edit())
+
 
 class Diff:
     def diff(self, a, b):
@@ -57,7 +92,8 @@ class Diff:
         differ.diff()
 
 
+
 if __name__ == "__main__":
     d = Diff()
-    d.diff("Diff-Myers/testcase_15_FB101-02-Simple-Left.txta",
+    d.diff("Diff-Myers/testcase_15_FB101-02-Simple-Left.txt",
            "Diff-Myers/testcase_15_FB101-02-Simple-Right.txt")
