@@ -81,7 +81,23 @@ class Myers:
 
     def backtrack(self):
         x, y = len(self._a), len(self._b)
-        
+        trace = self.shortest_edit()
+
+        # Note: This is a kind of ugly adpation of the Ruby line
+        #         trace.each_with_index.reverse_each do |v, d|
+        for d,v in list(reversed(list(enumerate(trace)))):
+            k = x - y
+
+            if k == -d or (k != d and v[k - 1] < v[k + 1]):
+                prev_k = k + 1
+            else:
+                prev_k = k - 1;
+            
+            prev_x = v[prev_k]
+            prev_y = prev_x - prev_k
+
+            
+
 
 
     def diff(self):
@@ -91,7 +107,7 @@ class Myers:
         if len(self._b) == 0:
             return
 
-        print(self.shortest_edit())
+        self.backtrack()
 
 
 class Diff:
