@@ -91,7 +91,7 @@ class Myers:
             if k == -d or (k != d and v[k - 1] < v[k + 1]):
                 prev_k = k + 1
             else:
-                prev_k = k - 1;
+                prev_k = k - 1
             
             prev_x = v[prev_k]
             prev_y = prev_x - prev_k
