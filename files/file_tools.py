@@ -5,19 +5,17 @@ import os
 
 def write_many_lines_to_file(file_name: str, number_of_lines: int):
     """ 
-    Generates a file with name ``file_name`` and fills it with as many 
-    lines as given by parameter ``number_of_lines``. The file will 
+    Generates a file with name ``file_name`` and fills it with as many
+    lines as given by parameter ``number_of_lines``. The file will
     contain lines with right aligned numbers:
 
-    Line   1
-    Line   2
+    Line   1 Line   2
     ...
     Line   9
     ....
     Line  10
     ...
-    Line  99
-    Line 100
+    Line  99 Line 100
     """
 
     if os.path.exists(file_name):
@@ -41,25 +39,27 @@ def write_many_lines_to_file(file_name: str, number_of_lines: int):
 
     output_file.close()
 
-def multi_insert_src_class_object(dir_path: str, file_extension, 
-                                  insert_text: str, insert_idx: int):
+def multi_insert_src_class_object(dir_path: str, 
+                                  file_extension, 
+                                  insert_text: str, 
+                                  insert_idx: int):
     """ 
-    Renames all files in directory ``dir_path`` whith extension 
+    Renames all files in directory ``dir_path`` whith extension
     ``file_extension`` by inserting the string ``insert_text`` at index
     ``insert_idx``.
-    
-    Additionally the file contents itself are read and all occurences 
-    of the old plain name (without path and extension) are replaced by 
+
+    Additionally the file contents itself are read and all occurences
+    of the old plain name (without path and extension) are replaced by
     the new plain name.
 
-    In this way a directory containing multiple Java/C++/C# files
-    can be renamed at one step together with the class names inside
-    the files itself.
+    In this way a directory containing multiple Java/C++/C# files can be
+    renamed at one step together with the class names inside the files
+    itself.
 
-    Name creation is done following the CamelCase rule so the first 
+    Name creation is done following the CamelCase rule so the first
     letter after the inserted text will be a capital.
 
-    NOTE ``file_extension`` can be a tuple or list cover multiple 
+    NOTE ``file_extension`` can be a tuple or list cover multiple
     extensions.
     """
 
@@ -95,11 +95,11 @@ def multi_insert_src_class_object(dir_path: str, file_extension,
         old_file_name = os.path.basename(old_file_name_full_path)
 
         # Now splitting the file name. The '1' argument means that only
-        # one split should be done. Everything after the first found 
+        # one split should be done. Everything after the first found
         # separator will be in the [1] field of the split result.
-        # 
-        # So when splitting 'Example.cs.designer' split_result[0] will 
-        # contain 'Example' and split_result[1] will contain the 
+        #
+        # So when splitting 'Example.cs.designer' split_result[0] will
+        # contain 'Example' and split_result[1] will contain the
         # complete extension '.cs.Designer'.
         split_result = old_file_name.split(os.extsep, 1)
 
@@ -137,11 +137,10 @@ def multi_insert_src_class_object(dir_path: str, file_extension,
 def create_name_for_insert(old_name: str, insert_text: str, 
                            insert_idx: int) -> str:
     """ 
-    Returns a new file name which is created from the existing file 
-    name ``old_name`` by inserting ``insert_text`` at the pos 
-    ``insert_idx``.
+    Returns a new file name which is created from the existing file name
+    ``old_name`` by inserting ``insert_text`` at the pos ``insert_idx``.
 
-    Name creation is done following the CamelCase rule so the first 
+    Name creation is done following the CamelCase rule so the first
     letter after the inserted text will be a capital.
     """
 
@@ -154,7 +153,7 @@ def create_name_for_insert(old_name: str, insert_text: str,
     # The right part; will be added after the new inserted string
     right_part_tmp = old_name[insert_idx:]
 
-    # The first char of the remaining part; will be changed to upper 
+    # The first char of the remaining part; will be changed to upper
     # case
     right_first_char = right_part_tmp[:1]
     right_first_char = right_first_char.upper()
