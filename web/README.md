@@ -28,8 +28,10 @@ The new Python environment has to be set up in VSCode.
 
 So in VSCode, open he Command Palette (Ctrl+Shift+P).
 
+Type: *Select Python Interpreter*
+
 In the combobox you see all Python interpreters, also the ones in the
-virttual environments. Select the newly created one.
+virtual environments. Select the newly created one.
 
 ### Install package Beautiful soap
 
