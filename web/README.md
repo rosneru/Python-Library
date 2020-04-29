@@ -15,14 +15,20 @@ Now create the virtual envrionment:
     virtualenv scraping_env
 
 
-**NOTE #1:** Now each time you want to use the environment call
+### Activate the virtual environment
+Now each time you want to use the environment call
     
     c:\Users\uwero\.virtualenvs\scraping_env\Scripts\activate.bat
 
 Where *uwero* has to be replaced by your Windows login.
 
 
-#### Activate the environment in VSCode
+#### Deactivate the virtual environment
+Just type in the python bash which prompts the current virtual environment:
+
+    Deactivate
+
+### Activate the environment in VSCode
 
 The new Python environment has to be set up in VSCode.
 

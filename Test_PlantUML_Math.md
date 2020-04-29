@@ -18,6 +18,13 @@ I can include as many plantuml segments as I want in my Markdown, and the diagra
     deactivate "login()"
 @enduml
 ```
+
+```plantuml
+@startuml
+testdot
+@enduml
+```
+
 $ f(x) = sin(x) + 12 $
 $$ \sum_n{n=1^{100}} $$
 
