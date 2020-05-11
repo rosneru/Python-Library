@@ -3,41 +3,7 @@
 from glob import glob
 import os
 
-def write_many_lines_to_file(file_name: str, number_of_lines: int):
-    """ 
-    Generates a file with name ``file_name`` and fills it with as many
-    lines as given by parameter ``number_of_lines``. The file will
-    contain lines with right aligned numbers:
 
-    Line   1 Line   2
-    ...
-    Line   9
-    ....
-    Line  10
-    ...
-    Line  99 Line 100
-    """
-
-    if os.path.exists(file_name):
-        print("Error: File already exists.")
-        return
-
-    try:
-        output_file = open(file_name, "w")
-    except:
-        print("Error: File can't be opened for writing.")
-        return
-
-    maxDigits = len(str(number_of_lines))
-    lineStr = "Line "
-    for number in range(number_of_lines):
-        numberStr = "{0:>{1}}".format(str(number), maxDigits)
-        output_file.write(lineStr + numberStr + '\n')
-    
-    print("{0} lines written sucessfully to new created file '{1}'."
-      .format(number_of_lines, file_name))
-
-    output_file.close()
 
 def multi_insert_src_class_object(dir_path: str, 
                                   file_extension, 
