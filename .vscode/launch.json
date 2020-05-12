@@ -9,8 +9,7 @@
       "type": "python",
       "request": "launch",
       "program": "${file}",
-      "args": ["2", 
-               "D:\\DEV\\Sysmex\\cube-8-reference\\src\\Cube8Reference\\Cube8Reference.sln",
+      "args": ["D:\\DEV\\Sysmex\\cube-8-reference\\src\\Cube8Reference\\Cube8Reference.sln",
                "Picked.txt"]
     },
   ]
