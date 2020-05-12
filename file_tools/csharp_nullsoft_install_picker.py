@@ -1,39 +1,54 @@
 import argparse
 import os
 
-def write_many_lines_to_file(file_name: str, number_of_lines: int):
-  """ 
-  Generates a file with name ``file_name`` and fills it with as many
-  lines as given by parameter ``number_of_lines``. The file will
-  contain lines with right aligned numbers:
+def pick_files(scan_depth: int, 
+               path_solution: str, 
+               path_output : str):
+  # """ 
+  # Generates a file with name ``file_name`` and fills it with as many
+  # lines as given by parameter ``number_of_lines``. The file will
+  # contain lines with right aligned numbers:
 
-  Line   1 Line   2
-  ...
-  Line   9
-  ....
-  Line  10
-  ...
-  Line  99 Line 100
-  """
+  # Line   1 Line   2
+  # ...
+  # Line   9
+  # ....
+  # Line  10
+  # ...
+  # Line  99 Line 100
+  # """
+  if path_output.endswith('.sln'):
+    print("Error: An output file name ending with .sln is not allowed.")
+    return
 
-  if os.path.exists(file_name):
-      print("Error: File already exists.")
-      return
+  if os.path.exists(path_solution) == False:
+    print("Error: Solution file not found.")
+    return
+
+  solution_dir = os.path.dirname(path_solution)
+
+  # Create a list of files found in all Release directories below the solution directoy
+  directory_list = []
+  for directories, _, files in os.walk(solution_dir):
+    for file_name in files:
+      rel_dir = os.path.relpath(directories, solution_dir)
+      if(rel_dir.endswith('Release')):
+        rel_file = os.path.join(rel_dir, file_name)
+        directory_list.append(rel_file)
+
+  print(directory_list)
 
   try:
       output_file = open(file_name, "w")
   except:
-      print("Error: File can't be opened for writing.")
+      print('Failed to open output file \'{0}\' for writing.'.format(path_output))
       return
 
-  maxDigits = len(str(number_of_lines))
-  lineStr = "Line "
-  for number in range(number_of_lines):
-      numberStr = "{0:>{1}}".format(str(number), maxDigits)
-      output_file.write(lineStr + numberStr + '\n')
-  
+  for item in directory_list:
+    output_file.write(item + os.linesep)
+
   print("{0} lines written sucessfully to new created file '{1}'."
-    .format(number_of_lines, file_name))
+    .format(directory_list.count, path_output))
 
   output_file.close()
 
@@ -57,5 +72,5 @@ if __name__ == "__main__":
                       help='The path to the file to write the picked results into.')
 
   args = parser.parse_args()
-  write_many_lines_to_file(args.file_name, args.n)
+  pick_files(args.depth[0], args.path_solution[0], args.path_output[0])
   
