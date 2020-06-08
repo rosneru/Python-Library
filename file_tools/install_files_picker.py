@@ -1,5 +1,6 @@
 import argparse
 import os
+from pathlib import Path
 
 # Scans the projects relative to a C# solution file and picks all .dll /
 # .config / .exec files of each project, then adds them to the output
@@ -18,21 +19,43 @@ def pick_files(solution_file_path: str,
 
   solution_dir = os.path.dirname(solution_file_path)
 
-  # Define the prefix which is added before each line
-  prefix = '  File "..\\'
-
   # Create a list of files found in all Release directories below the solution directoy
-  file_list = []
-  for directories, _, files in os.walk(solution_dir):
-    for file_name in files:
+  result_script = []
+  for directories, dirnames, _ in os.walk(solution_dir):
+    if 'obj' in dirnames:
+      dirnames.remove('obj')
+
+    if directories.endswith('Release'):
+      # construct the destination dir and create the nullsoft installer command
+      path = Path(directories)
+      a = path.parent.parent.parent.name
+      b = path.parent.parent.name
+      nullsoft_path_cmd = '  SetOutPath "$INSTDIR\{0}.{1}"'.format(a, b)
+      result_script.append(nullsoft_path_cmd)
+
+      # add all .dll files from source dir
       rel_dir = os.path.relpath(directories, solution_dir)
-      if rel_dir.endswith('Release'):
-        if(not file_name.endswith('.txt') and
-           not file_name.endswith('.pdb') and 
-           not file_name.endswith('.cache') and 
-           not file_name.endswith('.resources')):
-          rel_file = os.path.join(rel_dir, file_name)
-          file_list.append( prefix + rel_file + '"')
+      rel_file = os.path.join(rel_dir, "*.dll")
+      nullsoft_file_cmd = '  File "..\\{0}"'.format(rel_file)
+      result_script.append(nullsoft_file_cmd)   
+
+      # add all .exe files from source dir
+      rel_file = os.path.join(rel_dir, "*.exe")
+      nullsoft_file_cmd = '  File "..\\{0}"'.format(rel_file)
+      result_script.append(nullsoft_file_cmd)  
+
+      # add all .config files from source dir
+      rel_file = os.path.join(rel_dir, "*.config")
+      nullsoft_file_cmd = '  File "..\\{0}"'.format(rel_file)
+      result_script.append(nullsoft_file_cmd)   
+
+      # add all .xml files from source dir
+      rel_file = os.path.join(rel_dir, "*.xml")
+      nullsoft_file_cmd = '  File "..\\{0}"'.format(rel_file)
+      result_script.append(nullsoft_file_cmd)  
+
+      # add an empty line as separator
+      result_script.append('')
 
   try:
     output_file = open(output_file_path, "w")
@@ -40,11 +63,11 @@ def pick_files(solution_file_path: str,
     print('Failed to open output file \'{0}\' for writing.'.format(output_file_path))
     return
 
-  for item in file_list:
+  for item in result_script:
     output_file.write(item + '\n')
 
   print("{0} lines written sucessfully to new created file '{1}'."
-    .format(len(file_list), output_file_path))
+    .format(len(result_script), output_file_path))
 
   output_file.close()
 
@@ -63,13 +86,13 @@ if __name__ == "__main__":
   parser.add_argument('solution_file_path', 
                       nargs=1, 
                       type=str,
-                      metavar='solution file', 
+                      metavar='solution_file', 
                       help='The path to the solution file.')
 
   parser.add_argument('output_file_path', 
                       nargs=1, 
                       type=str,
-                      metavar='result file', 
+                      metavar='result_file', 
                       help='The path to the file to write the picked results into.')
 
   args = parser.parse_args()
