@@ -5,7 +5,7 @@ This directory is the place for experiments with web scrapers.
 
 ## Install dependencies
 
-### Set up a Virtual Envirunment
+### Set up a Virtual Environment
 Open a cmd in your Windows user directory.
 
 Create the directory .virtualenvs and enter it.
@@ -32,7 +32,7 @@ Just type in the python bash which prompts the current virtual environment:
 
 The new Python environment has to be set up in VSCode.
 
-So in VSCode, open he Command Palette (Ctrl+Shift+P).
+So in VSCode, open the Command Palette (Ctrl+Shift+P).
 
 Type: *Select Python Interpreter*
 
