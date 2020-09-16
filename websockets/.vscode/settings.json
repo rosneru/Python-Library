@@ -1,7 +1,4 @@
 {
-  "editor.rulers": [
-    72
-  ],
   "python.pythonPath": "/home/uro/.virtualenvs/websockets/bin/python",
   "python.linting.pylintPath": "/home/uro/.virtualenvs/websockets/bin/pylint",
   "python.linting.pylamaEnabled": true

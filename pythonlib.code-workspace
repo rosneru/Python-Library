@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"path": "algo"
+		},
+		{
+			"path": "excel"
+		},
+		{
+			"path": "file_tools"
+		},
+		{
+			"path": "math"
+		},
+		{
+			"path": "web"
+		},
+		{
+			"path": "websockets"
+		}
+	],
+	"remoteAuthority": "wsl+Debian",
+	"settings": {}
+}

@@ -1,5 +1,4 @@
 import asyncio
 import logging
-import websocketes
+import websockets
 
-jj
