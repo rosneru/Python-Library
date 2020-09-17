@@ -1,5 +1,7 @@
 {
   "python.pythonPath": "/home/uro/.virtualenvs/websockets/bin/python",
   "python.linting.pylintPath": "/home/uro/.virtualenvs/websockets/bin/pylint",
-  "python.linting.pylamaEnabled": true
+  "python.linting.pylamaEnabled": false,
+  "python.linting.pylintEnabled": true,
+  "python.linting.enabled": true
 }
