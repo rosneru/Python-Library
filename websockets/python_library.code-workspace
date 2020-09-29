@@ -5,5 +5,19 @@
 		}
 	],
 	"remoteAuthority": "wsl+Debian",
-	"settings": {}
+	"settings": {
+		"python.pythonPath": "/home/uro/.virtualenvs/websockets/bin/python"
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Python: Current File",
+				"type": "python",
+				"request": "launch",
+				"program": "${file}",
+				"console": "integratedTerminal"
+			}
+		]
+	}
 }
