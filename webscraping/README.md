@@ -12,13 +12,17 @@ Create the directory .virtualenvs and enter it.
 
 Now create the virtual envrionment:
 
-    virtualenv scraping_env
+    virtualenv scraping
 
 
 ### Activate the virtual environment
 Now each time you want to use the environment call
     
-    c:\Users\uwero\.virtualenvs\scraping_env\Scripts\activate.bat
+    # WINDOWS:
+    c:\Users\uwero\.virtualenvs\scraping\Scripts\activate.bat
+
+    # LINUX:
+    $ source ~/.virtualenvs/scraping/bin/activate
 
 Where *uwero* has to be replaced by your Windows login.
 
