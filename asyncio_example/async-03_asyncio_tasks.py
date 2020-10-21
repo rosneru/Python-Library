@@ -18,10 +18,4 @@ async def cook(order: str, time_to_prepare: int) -> None:
 
 asyncio.run(waiter())
 
-# Source: https://medium.com/@esfoobar/python-asyncio-for-beginners-c181ab226598
-#
-# What we’re doing here is creating three tasks with the different
-# orders. Tasks give us two benefits that we don’t get when we just
-# await an expression: first, tasks are used to schedule coroutines
-# concurrently, and second, tasks can be cancelled while we’re waiting
-# them to finish.
+
